@@ -1,0 +1,9 @@
+---
+- name: This playbook is just a test
+  hosts: localhost
+  become: True
+
+  tasks:
+  - name: Say Hello World
+    debug:
+      msg: "Hello World !"
