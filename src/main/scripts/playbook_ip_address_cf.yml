@@ -2,15 +2,26 @@
 - name: Acquire and Set an IP Address
   hosts: localhost
   gather_facts: no
+  
   vars:
   - ip_addr: 192.168.100.110
   - netmask: 255.255.255.0
   - gateway: 192.168.1.254
      
   tasks:
-  - debug: var=miq_provision_id
-  - debug: var=miq_provision_request_id
-  
+  #- debug: var=miq_provision_id
+  #- debug: var=miq_provision_request_id
+
+  - debug:
+    var: "{{ item }}"
+    with_items:
+      - "{{ ip_addr }}"
+      - "{{ netmask }}"
+      - "{{ gateway }}"
+      - "{{ server_api_url }}"
+      - "{{ server_api_user }}"
+
+
   - name: Update Task with New IP and Hostname Information
     uri:
       #url: "{{ server_api_url }}/api/provision_requests/{{ miq_provision_request_id }}/request_tasks/{{ miq_provision_id }}"
