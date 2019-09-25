@@ -1,0 +1,6 @@
+---
+
+# Server CloudForms variables
+server_api_url: https://cfme.onepoint.ninja
+server_api_user: admin
+server_api_pwd: "2+2=VingtDeux"
