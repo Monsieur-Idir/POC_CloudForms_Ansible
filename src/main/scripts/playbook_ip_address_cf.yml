@@ -13,7 +13,7 @@
   #- debug: var=miq_provision_request_id
 
   - debug:
-    var: "{{ item }}"
+      var: "{{ item }}"
     with_items:
       - "{{ ip_addr }}"
       - "{{ netmask }}"
