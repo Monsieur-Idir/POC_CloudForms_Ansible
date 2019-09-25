@@ -7,12 +7,14 @@
   - ip_addr: 192.168.100.110
   - netmask: 255.255.255.0
   - gateway: 192.168.1.254
-  - server_api_url: https://cfme.onepoint.ninja
+  - server_api_url: "https://cfme.onepoint.ninja"
   - server_api_user: admin
   - server_api_pwd: "2+2=VingtDeux"
 
   tasks:
-  
+ 
+  - debug: var=miq_provision_id
+  - debug: var=miq_provision_request_id
   - debug: var=ip_addr
   - debug: var=netmask
   - debug: var=gateway
@@ -29,7 +31,8 @@
 
   - name: Update Task with New IP and Hostname Information
     uri:
-      url: "https://cfme.onepoint.ninja/api/provision_requests/1000000000004/request_tasks/1000000000004"
+#      url: "https://cfme.onepoint.ninja/api/provision_requests/1000000000004/request_tasks/1000000000004"
+      url: "https://cfme.onepoint.ninja/api/provision_requests/{{ miq_provision_request_id }}/request_tasks/{{ miq_provision_id }}"
       method: POST
       body_format: json
       body:
