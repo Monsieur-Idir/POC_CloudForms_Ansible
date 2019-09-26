@@ -19,6 +19,8 @@
   - debug: var=netmask
   - debug: var=gateway
   - debug: var=server_api_user
+  - debug:
+      msg: "Onepoint - Ansible Test POC"
 
 #  - debug:
 #      var: "{{ item }}"
