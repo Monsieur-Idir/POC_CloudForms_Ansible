@@ -45,6 +45,11 @@
             ip_addr: "{{ ip_addr }}"
             subnet_mask: "{{ netmask }}"
             gateway: "{{ gateway }}"
+            current_tab_key: customize
+            dns_servers: 8.8.8.8
+            linux_domain_name: onepoint.ninja
+            sysprep_custom_spec: [null, null]
+            sysprep_enabled: ["fields", "Specification"]
       validate_certs: no
       #headers:
         #X-Auth-Token: "{{ manageiq.api_token }}"
