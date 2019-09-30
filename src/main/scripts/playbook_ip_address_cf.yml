@@ -5,7 +5,6 @@
   
   vars:
   - ip_addr: 192.168.111.112
-#  - ip_addr: "{{ ip_address }}"
   - netmask: 255.255.255.0
   - gateway: 192.168.1.254
   - server_api_url: "https://cfme.onepoint.ninja"
@@ -47,6 +46,7 @@
       url_username: "{{ server_api_user }}"
       url_password: "{{ server_api_pwd }}"
     register: GET_API_response
+    ignore_errors: True
 
   - name: Show the API response
     debug:
