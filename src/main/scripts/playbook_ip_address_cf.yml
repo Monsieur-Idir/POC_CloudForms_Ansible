@@ -11,20 +11,20 @@
   - server_api_user: admin
   - server_api_pwd: "2+2=VingtDeux"
 
-  vars:
-    vm:
-      VMtestIT101:
-        ip: 192.168.150.111
-      VMtestIT102:
-        ip: 192.168.150.112
-      VMtestIT103:
-        ip: 192.168.150.113
-      VMtestIT104:
-        ip: 192.168.150.114
-      VMtestIT105:
-        ip: 192.168.150.115
-      VMtestIT106:
-        ip: 192.168.150.116
+#  vars:
+#    vm:
+#      VMtestIT101:
+#        ip: 192.168.150.111
+#      VMtestIT102:
+#        ip: 192.168.150.112
+#      VMtestIT103:
+#        ip: 192.168.150.113
+#      VMtestIT104:
+#        ip: 192.168.150.114
+#      VMtestIT105:
+#        ip: 192.168.150.115
+#      VMtestIT106:
+#        ip: 192.168.150.116
 
   tasks:
 
@@ -84,7 +84,11 @@
 
   - name: Results
     debug:
-      msg: "{{item}}"
-    with_items:
-      - "{{ POST_API_response.json.message }}"
-      - "{{ POST_API_response.json.ip_addr }}"
+      msg: "The message is '{{ POST_API_response.json.message }}'"
+
+#  - name: Results
+#    debug:
+#      msg: "{{item}}"
+#    with_items:
+#      - "{{ POST_API_response.json.message }}"
+#      - "{{ POST_API_response.json.ip_addr }}"
