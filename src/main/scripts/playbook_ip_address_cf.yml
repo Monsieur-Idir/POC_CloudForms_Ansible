@@ -4,15 +4,31 @@
   gather_facts: no
   
   vars:
-  - ip_addr: 192.168.111.111
+  - ip_addr: 192.168.111.112
+#  - ip_addr: "{{ ip_address }}"
   - netmask: 255.255.255.0
   - gateway: 192.168.1.254
   - server_api_url: "https://cfme.onepoint.ninja"
   - server_api_user: admin
   - server_api_pwd: "2+2=VingtDeux"
 
+  vars:
+    vm:
+      VMtestIT101:
+        ip: 192.168.150.111
+      VMtestIT102:
+        ip: 192.168.150.112
+      VMtestIT103:
+        ip: 192.168.150.113
+      VMtestIT104:
+        ip: 192.168.150.114
+      VMtestIT105:
+        ip: 192.168.150.115
+      VMtestIT106:
+        ip: 192.168.150.116
+
   tasks:
- 
+
   - debug: var=miq_provision_id
   - debug: var=miq_provision_request_id
   - debug: var=ip_addr
@@ -20,20 +36,24 @@
   - debug: var=gateway
   - debug: var=server_api_user
   - debug:
-      msg: "Onepoint - Ansible Test POC"
+      msg: "Onepoint - Ansible Test POC 03 - Provision request N° {{ miq_provision_request_id }}"
 
-#  - debug:
-#      var: "{{ item }}"
-#    with_items:
-#      - "{{ ip_addr }}"
-#      - "{{ netmask }}"
-#      - "{{ gateway }}"
-#      - "{{ server_api_url }}"
-#      - "{{ server_api_user }}"
+  - name: Retrieve VM informations
+    uri:
+      url: "https://cfme.onepoint.ninja/api/provision_requests/{{ miq_provision_request_id }}"
+      method: GET
+      body_format: json
+      validate_certs: no
+      url_username: "{{ server_api_user }}"
+      url_password: "{{ server_api_pwd }}"
+    register: GET_API_response
+
+  - name: Show the API response
+    debug:
+      var: GET_API_response
 
   - name: Update Task with New IP and Hostname Information
     uri:
-#      url: "https://cfme.onepoint.ninja/api/provision_requests/1000000000004/request_tasks/1000000000004"
       url: "https://cfme.onepoint.ninja/api/provision_requests/{{ miq_provision_request_id }}/request_tasks/{{ miq_provision_id }}"
       method: POST
       body_format: json
@@ -43,6 +63,7 @@
           options:
             addr_mode: ["static", "Static"]
             ip_addr: "{{ ip_addr }}"
+#            ip_addr: "{{ API_response. }}"
             subnet_mask: "{{ netmask }}"
             gateway: "{{ gateway }}"
             current_tab_key: customize
@@ -51,9 +72,19 @@
             sysprep_custom_spec: [null, null]
             sysprep_enabled: ["fields", "Specification"]
       validate_certs: no
-      #headers:
-        #X-Auth-Token: "{{ manageiq.api_token }}"
       url_username: "{{ server_api_user }}"
       url_password: "{{ server_api_pwd }}"
       body_format: json
       status_code: 200
+    register: POST_API_response
+
+  - name: Show the API answer
+    debug:
+      var: POST_API_response
+
+  - name: Results
+    debug:
+      msg: "{{item}}"
+    with_items:
+      - "{{ POST_API_response.json.message }}"
+      - "{{ POST_API_response.json.ip_addr }}"
