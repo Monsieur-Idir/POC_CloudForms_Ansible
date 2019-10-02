@@ -6,15 +6,25 @@
   vars:
     vm:
       VMtestIT101:
-        ip: 192.168.150.111
+        ip: 192.168.150.101
       VMtestIT102:
-        ip: 192.168.150.112
+        ip: 192.168.150.102
       VMtestIT103:
-        ip: 192.168.150.113
+        ip: 192.168.150.103
       VMtestIT104:
-        ip: 192.168.150.114
+        ip: 192.168.150.104
       VMtestIT105:
-        ip: 192.168.150.115
+        ip: 192.168.150.105
+      VMtestIT106:
+        ip: 192.168.150.106
+      VMtestIT107:
+        ip: 192.168.150.107
+      VMtestIT108:
+        ip: 192.168.150.108
+      VMtestIT109:
+        ip: 192.168.150.109
+      VMtestIT110:
+        ip: 192.168.150.110
     netmask: 255.255.255.0
     gateway: 192.168.1.254
     server_api_url: "https://cfme.onepoint.ninja"
