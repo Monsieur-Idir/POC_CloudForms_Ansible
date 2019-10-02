@@ -58,7 +58,7 @@
         resource:
           options:
             addr_mode: ["static", "Static"]
-            ip_addr: vm[vm_name].ip
+            ip_addr: "{{vm[vm_name].ip}}"
             subnet_mask: "{{ netmask }}"
             gateway: "{{ gateway }}"
             current_tab_key: customize
