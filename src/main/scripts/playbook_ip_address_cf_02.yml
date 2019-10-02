@@ -4,7 +4,7 @@
   gather_facts: no
   
   vars:
-    vm:
+    vm_name:
       VMtestIT101:
         ip: 192.168.150.111
       VMtestIT102:
@@ -15,11 +15,15 @@
         ip: 192.168.150.114
       VMtestIT105:
         ip: 192.168.150.115
+      VMtestIT106:
+        ip: 192.168.150.116
     netmask: 255.255.255.0
     gateway: 192.168.1.254
     server_api_url: "https://cfme.onepoint.ninja"
     server_api_user: admin
     server_api_pwd: "2+2=VingtDeux"
+      
+#  - ip_addr: 192.168.111.112
 
 
   tasks:
@@ -30,23 +34,25 @@
   - debug: var=netmask
   - debug: var=gateway
   - debug: var=server_api_user
+  - debug: var={{vm_name}}
   - debug:
-      msg: "Onepoint - Ansible Test POC - Provision request N° {{ miq_provision_request_id }} with the VM {{vm_name}}"
+      msg: "Onepoint - Ansible Test POC 03 - Provision request N° {{ miq_provision_request_id }} with the VM {{vm_name}}"
 
-#  - name: Retrieve VM informations
-#    uri:
-#      url: "https://cfme.onepoint.ninja/api/provision_requests/{{ miq_provision_request_id }}"
-#      method: GET
-#      body_format: json
-#      validate_certs: no
-#      url_username: "{{ server_api_user }}"
-#      url_password: "{{ server_api_pwd }}"
-#    register: GET_API_response
-#    ignore_errors: True
+  - name: Retrieve VM informations
+    uri:
+      url: "https://cfme.onepoint.ninja/api/provision_requests/{{ miq_provision_request_id }}"
+      method: GET
+      body_format: json
+      validate_certs: no
+      url_username: "{{ server_api_user }}"
+      url_password: "{{ server_api_pwd }}"
+    register: GET_API_response
+    ignore_errors: True
 
-#  - name: Show the API response
-#    debug:
-#      var: GET_API_response
+  - name: Show the API response
+    debug:
+      var: GET_API_response
+
 
   - name: Update Task with New IP and Hostname Information
     uri:
@@ -58,7 +64,8 @@
         resource:
           options:
             addr_mode: ["static", "Static"]
-            ip_addr: "{{vm[vm_name].ip}}"
+            ip_addr: "{{ ip_addr }}"
+#            ip_addr: "{{ API_response. }}"
             subnet_mask: "{{ netmask }}"
             gateway: "{{ gateway }}"
             current_tab_key: customize
