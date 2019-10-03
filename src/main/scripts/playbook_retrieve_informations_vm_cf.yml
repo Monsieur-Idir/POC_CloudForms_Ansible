@@ -1,0 +1,45 @@
+---
+- name: Get informations of the provisioned VM
+  hosts: localhost
+  gather_facts: no
+  
+  vars:
+    server_api_url: "https://cfme.onepoint.ninja"
+    server_api_user: admin
+    server_api_pwd: "2+2=VingtDeux"
+
+
+  tasks:
+
+  - debug: var=miq_provision_id
+  - debug: var=miq_provision_request_id
+  - debug: var=vm_name
+  - debug:
+      msg: "Onepoint - Ansible Test POC - Provision request N° {{ miq_provision_request_id }} with the VM {{vm_name}}"
+
+  - name: Retrieve VM informations
+    uri:
+      url: "https://cfme.onepoint.ninja/api/vms?expand=resources&attributes=name,ipaddresses,mac_addresses,&filter[]=name='{{vm_name}}'"
+      method: GET
+      body_format: json
+      validate_certs: no
+      url_username: "{{ server_api_user }}"
+      url_password: "{{ server_api_pwd }}"
+    register: GET_API_response
+    ignore_errors: True
+
+  - name: Show message
+    debug:
+      var: GET_API_response
+
+
+  - name: Results
+    debug:
+      msg: "The message is '{{ POST_API_response.json.message }}'"
+
+#  - name: Results
+#    debug:
+#      msg: "{{item}}"
+#    with_items:
+#      - "{{ POST_API_response.json.message }}"
+#      - "{{ POST_API_response.json.ip_addr }}"
