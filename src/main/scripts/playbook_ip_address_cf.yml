@@ -25,6 +25,18 @@
         ip: 192.168.150.109
       VMtestIT110:
         ip: 192.168.150.110
+      VMtestIT111:
+        ip: 192.168.150.111
+      VMtestIT112:
+        ip: 192.168.150.112
+      VMtestIT113:
+        ip: 192.168.150.113
+      VMtestIT114:
+        ip: 192.168.150.114
+      VMtestIT115:
+        ip: 192.168.150.115
+      VMtestIT116:
+        ip: 192.168.150.116
     netmask: 255.255.255.0
     gateway: 192.168.1.254
     server_api_url: "https://cfme.onepoint.ninja"

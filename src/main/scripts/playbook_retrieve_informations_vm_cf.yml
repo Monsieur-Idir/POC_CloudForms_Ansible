@@ -32,10 +32,9 @@
     debug:
       var: GET_API_response
 
-
   - name: Results
     debug:
-      msg: "The message is '{{ POST_API_response.json.message }}'"
+      msg: "The message is '{{ GET_API_response.json.resources }}'"
 
 #  - name: Results
 #    debug:
