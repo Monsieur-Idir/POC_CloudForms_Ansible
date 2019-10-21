@@ -49,9 +49,17 @@
         ip: 192.168.150.121
       VMtestIT122:
         ip: 192.168.150.122
+      VTLJBS001:
+        ip: 192.168.170.101
+      VTLJBS002:
+        ip: 192.168.170.102
+      VTLJBS003:
+        ip: 192.168.170.103
+      VTLJBS004:
+        ip: 192.168.170.104
 
     netmask: 255.255.255.0
-    gateway: 192.168.1.254
+    gateway: 192.168.170.254
     server_api_url: "https://cfme.onepoint.ninja"
     server_api_user: admin
     server_api_pwd: "2+2=VingtDeux"
