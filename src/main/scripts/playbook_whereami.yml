@@ -1,0 +1,20 @@
+---
+- name: This playbook is just a test
+  hosts: localhost
+  #become: True
+
+  tasks:
+  - name: Say Hello World
+    debug:
+      msg: "Hello World"
+
+ - name: Show me where am I
+   command: $pwd
+
+ - name: Show me who am I
+   command: whoami
+
+ - name: List files
+   command: ls -ltrah
+   
+
