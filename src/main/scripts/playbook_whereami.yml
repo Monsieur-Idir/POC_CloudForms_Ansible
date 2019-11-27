@@ -8,13 +8,13 @@
     debug:
       msg: "Hello World"
 
- - name: Show me where am I
-   command: $pwd
+  - name: Show me where am I
+    command: $pwd
 
- - name: Show me who am I
-   command: whoami
+  - name: Show me who am I
+    command: whoami
 
- - name: List files
-   command: ls -ltrah
+  - name: List files
+    command: ls -ltrah
    
 
